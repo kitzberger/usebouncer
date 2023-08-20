@@ -1,0 +1,2 @@
+# cat=basic//1; type=string; label=API Key
+apiKey=

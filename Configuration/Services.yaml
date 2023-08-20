@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Kitzberger\Usebouncer\:
+    resource: '../Classes/*'
+
+  Kitzberger\Usebouncer\Service\Api:
+    public: true
