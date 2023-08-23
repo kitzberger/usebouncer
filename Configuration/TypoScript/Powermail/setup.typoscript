@@ -1,11 +1,21 @@
-plugin.tx_powermail.settings.setup {
-    spamshield.methods {
-        50 {
-            _enable = 1
-            name = Usebouncer.com
-            class = Kitzberger\Usebouncer\Domain\Validator\Spamshield\UsebouncerMethod
-            indication = 99
-            configuration {
+plugin.tx_powermail {
+    settings.setup {
+        spamshield.methods {
+            50 {
+                _enable = {$plugin.tx_powermail.settings.spamshield.usebouncer}
+                name = Usebouncer.com
+                class = Kitzberger\Usebouncer\Domain\Validator\Spamshield\UsebouncerMethod
+                indication = 99
+                configuration {
+                }
+            }
+        }
+        validators {
+            50 {
+                class = Kitzberger\Usebouncer\Domain\Validator\UsebouncerValidator
+                config {
+                    _enable = {$plugin.tx_powermail.settings.validation.usebouncer}
+                }
             }
         }
     }

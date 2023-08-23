@@ -1,0 +1,10 @@
+plugin.tx_powermail {
+    settings {
+        validation {
+            usebouncer = 1
+        }
+        spamshield {
+            usebouncer = 0
+        }
+    }
+}
