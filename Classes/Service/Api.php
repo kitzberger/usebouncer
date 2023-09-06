@@ -6,6 +6,8 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
+use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 
 class Api implements LoggerAwareInterface
 {
@@ -61,13 +63,16 @@ class Api implements LoggerAwareInterface
                 $this->logger->log(LogLevel::ERROR, 'Resource requires login in Usebouncer');
                 throw new UnauthorizedException(
                     '401 from Usebouncer! Check ENV Variables for Usebouncer Credentials',
-                    1689607662291
+                    1694012897
                 );
             case 403:
                 $response = $this->parseBody($response);
                 // Todo: maybe actually look at response?
                 $this->logger->log(LogLevel::WARNING, 'Resource requires login in Usebouncer');
-                throw new ResourceRequiresLoginException('403 from Usebouncer!');
+                throw new UnauthorizedException(
+                    '403 from Usebouncer!',
+                    1694012898
+                );
             case 404:
                 $response = $this->parseBody($response);
                 // Todo: maybe actually look at response?
