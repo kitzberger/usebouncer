@@ -9,3 +9,9 @@ services:
 
   Kitzberger\Usebouncer\Service\Api:
     public: true
+
+  Kitzberger\Usebouncer\Command\TestCommand:
+    tags:
+      - name: 'console.command'
+        command: 'usebouncer:test'
+        schedulable: false

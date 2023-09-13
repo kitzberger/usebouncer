@@ -10,6 +10,14 @@ This TYPO3 extension provides mail address validation via usebouncer.com as EXT:
 
 This'll run a usebouncer.com check on the field that's defined as the 'sender email address'.
 
+## CLI
+
+There's a CLI command for testing an email address:
+
+```bash
+./bin/typo3 usebouncer:test mail@example.org
+```
+
 ## Logger
 
 Set this in your AdditionalConfiguration.php to activate logging for debugging purposes.

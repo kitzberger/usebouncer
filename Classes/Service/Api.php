@@ -13,6 +13,8 @@ class Api implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
+    private ?string $reason = null;
+
     /** @var RequestFactoryInterface */
     private $requestFactory;
 
@@ -56,6 +58,8 @@ class Api implements LoggerAwareInterface
             ],
         ];
 
+        $this->reason = null;
+
         // Return a PSR-7 compliant response object
         $response = $this->requestFactory->request($url, 'GET', $additionalOptions);
 
@@ -64,6 +68,7 @@ class Api implements LoggerAwareInterface
             case 200:
                 $response = $this->parseBody($response);
                 $this->logger->debug(print_r($response, true));
+                $this->reason = $response['status'];
                 return $response['status'] === 'deliverable';
             case 401:
                 $this->logger->log(LogLevel::ERROR, 'Resource requires login in Usebouncer');
@@ -87,6 +92,11 @@ class Api implements LoggerAwareInterface
             default:
                 throw new \Exception('Unknown response code from Usebouncer!');
         }
+    }
+
+    public function getReason(): ?string
+    {
+        return $this->reason;
     }
 
     protected function parseBody($response)
