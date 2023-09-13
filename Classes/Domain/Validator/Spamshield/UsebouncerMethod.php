@@ -21,7 +21,7 @@ class UsebouncerMethod extends AbstractMethod
         foreach ($this->mail->getAnswers() as $answer) {
             if ($answer->getField()->isSenderEmail()) {
                 $email = $answer->getValue();
-                return $this->api->checkMail($email);
+                return $this->api->checkMail($email) === false;
             }
         }
 

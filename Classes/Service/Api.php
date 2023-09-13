@@ -21,6 +21,12 @@ class Api implements LoggerAwareInterface
         $this->requestFactory = $requestFactory;
     }
 
+    /**
+     * Check a given mail address via usebouncer.com
+     *
+     * @param  string $mail
+     * @return bool true if valid
+     */
     public function checkMail(string $mail): bool
     {
         $this->logger->info('Checking mail address: ' . $mail);
@@ -58,7 +64,7 @@ class Api implements LoggerAwareInterface
             case 200:
                 $response = $this->parseBody($response);
                 $this->logger->debug(print_r($response, true));
-                return $response['status'] !== 'deliverable';
+                return $response['status'] === 'deliverable';
             case 401:
                 $this->logger->log(LogLevel::ERROR, 'Resource requires login in Usebouncer');
                 throw new UnauthorizedException(

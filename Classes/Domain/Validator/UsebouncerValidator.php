@@ -27,7 +27,7 @@ class UsebouncerValidator extends AbstractValidator
                 if ($answer->getField()->isSenderEmail()) {
                     $senderEmail = $answer->getValue();
                     $this->api = GeneralUtility::makeInstance(Api::class);
-                    if ($this->api->checkMail($senderEmail)) {
+                    if ($this->api->checkMail($senderEmail) === false) {
                         $result->addError(new Error(
                             LocalizationUtility::translate(
                                 'usebouncer-doesnt-like-mail-address',
