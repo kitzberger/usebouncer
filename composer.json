@@ -3,11 +3,19 @@
   "type": "typo3-cms-extension",
   "description": "Mail address validation via usebouncer.com (for powermail)",
   "homepage": "https://github.com/kitzberger/usebouncer",
+  "authors": [
+    {
+      "name": "Philipp Kitzberger",
+      "role": "Developer"
+    }
+  ],
   "license": [
     "GPL-2.0-or-later"
   ],
   "keywords": [
-    "TYPO3 CMS"
+    "TYPO3 CMS",
+    "powermail",
+    "usebouncer.com"
   ],
   "require": {
     "typo3/cms-core": "^11.5"
