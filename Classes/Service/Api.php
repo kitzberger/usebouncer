@@ -34,7 +34,7 @@ class Api implements LoggerAwareInterface
         $this->logger->info('Checking mail address: ' . $mail);
 
         # See https://docs.usebouncer.com/ for details.
-        $url = 'https://api.usebouncer.com/v1.1/email/verify?email=' . $mail;
+        $url = 'https://api.usebouncer.com/v1.1/email/verify?email=' . rawurlencode($mail);
 
         # Auth
         $username = ''; // always empty
