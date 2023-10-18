@@ -73,8 +73,14 @@ class Api implements LoggerAwareInterface
             case 401:
                 $this->logger->log(LogLevel::ERROR, 'Resource requires login in Usebouncer');
                 throw new UnauthorizedException(
-                    '401 from Usebouncer! Check ENV Variables for Usebouncer Credentials',
+                    '401 from Usebouncer! Check ENV Variables for Usebouncer Credentials.',
                     1694012897
+                );
+            case 402:
+                $this->logger->log(LogLevel::ERROR, 'Resource requires payment in Usebouncer');
+                throw new UnauthorizedException(
+                    '402 from Usebouncer! Check your Usebouncer subscription.',
+                    1694012899
                 );
             case 403:
                 $response = $this->parseBody($response);
@@ -90,7 +96,9 @@ class Api implements LoggerAwareInterface
                 $this->logger->log(LogLevel::WARNING, 'Resource not found in Usebouncer');
                 throw new ResourceDoesNotExistException('404 from Usebouncer!');
             default:
-                throw new \Exception('Unknown response code from Usebouncer!');
+                $message = sprintf('Unhandled response code %d from Usebouncer!', $response->getStatusCode());
+                $this->logger->log(LogLevel::ERROR, $message);
+                throw new \Exception($message);
         }
     }
 
