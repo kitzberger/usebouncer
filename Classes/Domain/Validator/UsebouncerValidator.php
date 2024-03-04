@@ -14,12 +14,10 @@ class UsebouncerValidator extends AbstractValidator
 {
     /**
     * Check email via usebouncer
-    *
-    * @param Mail $mail
-    * @return Result
     */
-    public function validate($mail)
+    public function isValid(mixed $value): void
     {
+        $mail = $value;
         $result = new Result();
 
         if ($this->configuration['_enable'] ?? false) {
@@ -28,19 +26,17 @@ class UsebouncerValidator extends AbstractValidator
                     $senderEmail = $answer->getValue();
                     $this->api = GeneralUtility::makeInstance(Api::class);
                     if ($this->api->checkMail($senderEmail) === false) {
-                        $result->addError(new Error(
-                            LocalizationUtility::translate(
-                                'usebouncer-doesnt-like-mail-address',
-                                'usebouncer'
-                            ),
-                            1692805794,
-                            ['marker' => $answer->getField()->getMarker()]
-                        ));
+                        $this->setErrorAndMessage($answer->getField(), 'usebouncer-doesnt-like-mail-address');
+                        $this->setValidState(false);
+                        // LocalizationUtility::translate(
+                        //     'usebouncer-doesnt-like-mail-address',
+                        //     'usebouncer'
+                        // ),
+                        // 1692805794,
+                        // ['marker' => $answer->getField()->getMarker()]
                     }
                 }
             }
         }
-
-        return $result;
     }
 }
