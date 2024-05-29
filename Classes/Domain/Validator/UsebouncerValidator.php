@@ -2,13 +2,12 @@
 
 namespace Kitzberger\Usebouncer\Domain\Validator;
 
-use In2code\Powermail\Domain\Model\Mail;
 use In2code\Powermail\Domain\Validator\AbstractValidator;
 use In2code\Powermail\Utility\LocalizationUtility;
 use Kitzberger\Usebouncer\Service\Api;
-use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Error\Error;
+use TYPO3\CMS\Extbase\Error\Result;
 
 class UsebouncerValidator extends AbstractValidator
 {

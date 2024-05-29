@@ -3,9 +3,9 @@
 namespace Kitzberger\Usebouncer\Service;
 
 use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Log\LogLevel;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LogLevel;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 
