@@ -23,17 +23,19 @@ class UsebouncerValidator extends AbstractValidator
         if ($this->configuration['_enable'] ?? false) {
             foreach ($mail->getAnswers() as $answer) {
                 if ($answer->getField()->isSenderEmail()) {
-                    $senderEmail = $answer->getValue();
-                    $this->api = GeneralUtility::makeInstance(Api::class);
-                    if ($this->api->checkMail($senderEmail) === false) {
-                        $this->setErrorAndMessage($answer->getField(), 'usebouncer-doesnt-like-mail-address');
-                        $this->setValidState(false);
-                        // LocalizationUtility::translate(
-                        //     'usebouncer-doesnt-like-mail-address',
-                        //     'usebouncer'
-                        // ),
-                        // 1692805794,
-                        // ['marker' => $answer->getField()->getMarker()]
+                    $senderEmail = trim($answer->getValue());
+                    if (!empty($senderEmail)) {
+                        $this->api = GeneralUtility::makeInstance(Api::class);
+                        if ($this->api->checkMail($senderEmail) === false) {
+                            $result->addError(new Error(
+                                LocalizationUtility::translate(
+                                    'usebouncer-doesnt-like-mail-address',
+                                    'usebouncer'
+                                ),
+                                1692805794,
+                                ['marker' => $answer->getField()->getMarker()]
+                            ));
+                        }
                     }
                 }
             }
