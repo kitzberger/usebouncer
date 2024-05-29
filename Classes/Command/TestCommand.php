@@ -6,10 +6,8 @@ use Kitzberger\Usebouncer\Service\Api;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TestCommand extends Command
 {
@@ -31,9 +29,6 @@ class TestCommand extends Command
         parent::__construct();
     }
 
-    /**
-     * Configure the command by defining the name
-     */
     protected function configure()
     {
         $this->setDescription('CLI Tool to test mail addresses against usebouncer.com');
@@ -46,13 +41,7 @@ class TestCommand extends Command
         );
     }
 
-    /**
-     * Executes the command
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->conf = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['queisser_cache_mgmt'];
 

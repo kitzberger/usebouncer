@@ -2,24 +2,21 @@
 
 namespace Kitzberger\Usebouncer\Domain\Validator;
 
-use In2code\Powermail\Domain\Model\Mail;
 use In2code\Powermail\Domain\Validator\AbstractValidator;
 use In2code\Powermail\Utility\LocalizationUtility;
 use Kitzberger\Usebouncer\Service\Api;
-use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Error\Error;
+use TYPO3\CMS\Extbase\Error\Result;
 
 class UsebouncerValidator extends AbstractValidator
 {
     /**
     * Check email via usebouncer
-    *
-    * @param Mail $mail
-    * @return Result
     */
-    public function validate($mail)
+    public function isValid(mixed $value): void
     {
+        $mail = $value;
         $result = new Result();
 
         if ($this->configuration['_enable'] ?? false) {
@@ -42,7 +39,5 @@ class UsebouncerValidator extends AbstractValidator
                 }
             }
         }
-
-        return $result;
     }
 }
