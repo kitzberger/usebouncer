@@ -21,8 +21,8 @@ class UsebouncerValidator extends AbstractValidator
                 if ($answer->getField()->isSenderEmail()) {
                     $senderEmail = trim($answer->getValue());
                     if (!empty($senderEmail)) {
-                        $this->api = GeneralUtility::makeInstance(Api::class);
-                        if ($this->api->checkMail($senderEmail) === false) {
+                        $api = GeneralUtility::makeInstance(Api::class);
+                        if ($api->checkMail($senderEmail) === false) {
                             $this->setErrorAndMessage(
                                 $answer->getField(),
                                 LocalizationUtility::translate(
