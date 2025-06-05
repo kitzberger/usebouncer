@@ -15,12 +15,8 @@ class Api implements LoggerAwareInterface
 
     private ?string $reason = null;
 
-    /** @var RequestFactoryInterface */
-    private $requestFactory;
-
-    public function __construct(RequestFactoryInterface $requestFactory)
+    public function __construct(private RequestFactoryInterface $requestFactory)
     {
-        $this->requestFactory = $requestFactory;
     }
 
     /**
@@ -110,7 +106,7 @@ class Api implements LoggerAwareInterface
     protected function parseBody($response)
     {
         if ($response->getHeaderLine('Content-Type') === 'application/json') {
-            $content = json_decode($response->getBody()->getContents(), true);
+            $content = json_decode((string) $response->getBody()->getContents(), true);
 
             if (json_last_error()) {
                 $this->logger->log(LogLevel::ERROR, json_last_error_msg());

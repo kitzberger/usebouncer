@@ -21,11 +21,8 @@ class TestCommand extends Command
      */
     protected $io = null;
 
-    private $api;
-
-    public function __construct(Api $api)
+    public function __construct(private readonly Api $api)
     {
-        $this->api = $api;
         parent::__construct();
     }
 

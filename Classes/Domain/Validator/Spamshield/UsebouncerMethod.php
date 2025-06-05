@@ -20,7 +20,7 @@ class UsebouncerMethod extends AbstractMethod
     {
         foreach ($this->mail->getAnswers() as $answer) {
             if ($answer->getField()->isSenderEmail()) {
-                $email = trim($answer->getValue());
+                $email = trim((string) $answer->getValue());
                 if (empty($email)) {
                     return false;
                 } else {

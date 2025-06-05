@@ -19,7 +19,7 @@ class UsebouncerValidator extends AbstractValidator
         if ($this->configuration['_enable'] ?? false) {
             foreach ($mail->getAnswers() as $answer) {
                 if ($answer->getField()->isSenderEmail()) {
-                    $senderEmail = trim($answer->getValue());
+                    $senderEmail = trim((string) $answer->getValue());
                     if (!empty($senderEmail)) {
                         $api = GeneralUtility::makeInstance(Api::class);
                         if ($api->checkMail($senderEmail) === false) {
