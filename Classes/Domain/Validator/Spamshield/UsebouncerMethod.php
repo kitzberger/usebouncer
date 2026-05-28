@@ -8,6 +8,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class UsebouncerMethod extends AbstractMethod
 {
+    private $api;
+
     public function initialize(): void
     {
         $this->api = GeneralUtility::makeInstance(Api::class);
