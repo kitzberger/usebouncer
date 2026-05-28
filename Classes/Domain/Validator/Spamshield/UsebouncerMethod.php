@@ -18,6 +18,7 @@ class UsebouncerMethod extends AbstractMethod
     /**
      * @return bool true if spam recognized
      */
+    #[\Override]
     public function spamCheck(): bool
     {
         foreach ($this->mail->getAnswers() as $answer) {

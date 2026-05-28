@@ -90,11 +90,11 @@ class Api implements LoggerAwareInterface
                 $response = $this->parseBody($response);
                 // Todo: maybe actually look at response?
                 $this->logger->log(LogLevel::WARNING, 'Resource not found in Usebouncer');
-                throw new ResourceDoesNotExistException('404 from Usebouncer!');
+                throw new ResourceDoesNotExistException('404 from Usebouncer!', 3941045138);
             default:
                 $message = sprintf('Unhandled response code %d from Usebouncer!', $response->getStatusCode());
                 $this->logger->log(LogLevel::ERROR, $message);
-                throw new \Exception($message);
+                throw new \Exception($message, 9981331244);
         }
     }
 
@@ -108,7 +108,7 @@ class Api implements LoggerAwareInterface
         if ($response->getHeaderLine('Content-Type') === 'application/json') {
             $content = json_decode((string) $response->getBody()->getContents(), true);
 
-            if (json_last_error()) {
+            if (json_last_error() !== 0) {
                 $this->logger->log(LogLevel::ERROR, json_last_error_msg());
             }
 
@@ -116,6 +116,6 @@ class Api implements LoggerAwareInterface
         }
 
         $this->logger->log(LogLevel::ERROR, 'Unknown Content-Type: ' . $response->getHeaderLine('Content-Type'));
-        throw new \Exception('Unknown Content-Type: ' . $response->getHeaderLine('Content-Type'));
+        throw new \Exception('Unknown Content-Type: ' . $response->getHeaderLine('Content-Type'), 1603557018);
     }
 }
